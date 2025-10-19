@@ -9,7 +9,6 @@ readme = "README.md"
 keywords = ["derive", "macro", "enum", "struct"]
 categories = ["rust-patterns"]
 license = "MIT OR Apache-2.0"
-license-file = "LICENSE"
 repository = "https://github.com/JohnScience/variants-data-struct"
 
 [dependencies]
