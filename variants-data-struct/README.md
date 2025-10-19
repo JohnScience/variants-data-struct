@@ -35,3 +35,10 @@ pub enum MyEnum {
 //     pub name: String,
 // }
 ```
+
+## Similar crates
+
+* [`variants-struct`](https://crates.io/crates/variants-struct),
+* [`enum-struct`](https://crates.io/crates/enum-struct),
+* [`enum-collections`](https://crates.io/crates/enum-collections),
+* [`enum_variant_type`](https://crates.io/crates/enum_variant_type).
