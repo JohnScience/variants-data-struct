@@ -2,12 +2,22 @@
 name = "variants-data-struct"
 version = "0.1.0"
 edition = "2024"
+authors = ["Dmitrii Demenev <demenev.dmitriy1@gmail.com>"]
+description = "A derive macro to convert enums into a struct where the variants are members and types are that that of variants data."
+documentation = "https://docs.rs/variants-data-struct"
+readme = "README.md"
+keywords = ["derive", "macro", "enum", "struct"]
+categories = ["rust-patterns"]
+license = "MIT OR Apache-2.0"
+license-file = "LICENSE"
+repository = "https://github.com/JohnScience/variants-data-struct"
 
 [dependencies]
-syn = { version = "2.0", features = ["full"] }
-quote = "1.0"
-proc-macro2 = "1.0"
 convert_case = "0.8"
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = { version = "2.0", features = ["full"] }
 
 [lib]
 proc-macro = true
+required-features = []
