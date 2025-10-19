@@ -1,3 +1,4 @@
+#[doc = include_str!("../README.md")]
 use convert_case::Casing as _;
 
 use convert_case::Case;
@@ -302,6 +303,44 @@ fn variants_data_struct_defs(
     }
 }
 
+/// Derive macro to generate a data struct containing fields for each variant of the enum.
+///
+/// ```rust
+/// use variants_data_struct::VariantsDataStruct;
+///
+/// #[derive(VariantsDataStruct)]
+/// pub enum MyEnum {
+///     UnitEnum,
+///     TupleEnum(i32, String),
+///     StructEnum { id: u32, name: String },
+/// }
+///
+/// // Equivalent to:
+/// // pub struct MyEnumVariantsData {
+/// //     pub unit_enum: (),
+/// //     pub tuple_enum: TupleEnumVariantType,
+/// //     pub struct_enum: StructEnumVariantType,
+/// // }
+/// //
+/// // pub struct TupleEnumVariantType(pub i32, pub String);
+/// //
+/// // pub struct StructEnumVariantType {
+/// //     pub id: u32,
+/// //     pub name: String,
+/// // }
+/// ```
+///
+/// ## Helper attributes
+///
+/// ### `#[variants_data_struct(<meta>)]` customizes the behavior of the derive macro.
+/// The `<meta>` is a comma-separated list that can contain the following items:
+///
+/// - `name = <CustomName>`: Specifies a custom name for the generated data struct.
+///  If not provided, the default name is `<EnumName>VariantsData`.
+/// - `attrs(#[derive(...)] ...)`: Adds the specified attributes to the generated data struct. Notably, you
+/// can use it to add derives like `Debug`, `Clone` to the generated struct.
+/// - `variants_tys_attrs(#[derive(...)] ...)`: Adds the specified attributes to each of the generated variant type structs.
+/// Notably, you can use it to add derives like `Debug`, `Clone` to the generated variant type structs.
 #[proc_macro_derive(VariantsDataStruct, attributes(variants_data_struct))]
 pub fn derive_variants_data_struct(item: TokenStream) -> TokenStream {
     let input = syn::parse_macro_input!(item as syn::DeriveInput);
