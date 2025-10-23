@@ -71,7 +71,8 @@ use crate::variants_data_struct_meta::VariantsDataStructMeta;
 /// the type is derived from the original variant's fields. For variants without fields (a unit variant or a struct or tuple variant with no fields),
 /// the type is `()`. For tuple and struct variants, a separate "variant type" struct is generated to encapsulate the fields.
 /// - `gen_variant_ty`: Overrides the decision whether to generate a separate "variant type" struct for the variant.
-/// If not provided, a "variant type" struct is generated for tuple and struct variants, and not for unit variants.
+/// If not provided, a "variant type" struct is generated for tuple and struct variants, and not for unit variants. If `field_ty_override` is provided,
+/// by default, no "variant type" struct is generated.
 #[proc_macro_derive(
     VariantsDataStruct,
     attributes(variants_data_struct, variants_data_struct_field)

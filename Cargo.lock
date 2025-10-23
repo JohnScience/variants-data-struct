@@ -61,7 +61,7 @@ checksum = "f6ccf251212114b54433ec949fd6a7841275f9ada20dddd2f29e9ceea4501493"
 
 [[package]]
 name = "variants-data-struct"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "convert_case",
  "proc-macro2",

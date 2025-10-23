@@ -102,6 +102,24 @@ pub enum EnumC {
 //     pub(self) flag: bool,
 // }
 
+#[derive(VariantsDataStruct)]
+pub enum EnumD {
+    #[variants_data_struct_field(
+        field_ty_override = bool
+    )]
+    A,
+    #[variants_data_struct_field(
+        field_ty_override = bool
+    )]
+    B,
+}
+
+// Equivalent to:
+// pub struct EnumDVariantsData {
+//     pub a: bool,
+//     pub b: bool,
+// }
+
 #[test]
 fn test_variants_data_struct() {
     let _data_struct = EnumAVariantsData {

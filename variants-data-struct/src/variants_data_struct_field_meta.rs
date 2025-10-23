@@ -91,11 +91,14 @@ impl VariantsDataStructFieldMeta {
 
         let gen_variant_ty = match gen_variant_ty {
             Some(val) => val,
-            None => match &variant.fields {
-                syn::Fields::Unit => false,
-                syn::Fields::Named(named_fields) => named_fields.named.len() > 0,
-                syn::Fields::Unnamed(unnamed_fields) => unnamed_fields.unnamed.len() > 0,
-            },
+            None => {
+                field_ty_override.is_none()
+                    && match &variant.fields {
+                        syn::Fields::Unit => false,
+                        syn::Fields::Named(named_fields) => named_fields.named.len() > 0,
+                        syn::Fields::Unnamed(unnamed_fields) => unnamed_fields.unnamed.len() > 0,
+                    }
+            }
         };
 
         let variant_ty = if !gen_variant_ty {
