@@ -5,7 +5,7 @@ use variants_data_struct::VariantsDataStruct;
 
 #[derive(VariantsDataStruct)]
 
-pub enum MyEnum {
+pub enum EnumA {
     UnitEnum,
     TupleEnum(i32, String),
     StructEnum { id: u32, name: String },
@@ -13,7 +13,7 @@ pub enum MyEnum {
 
 // Equivalent to:
 //
-// pub struct MyEnumVariantsData {
+// pub struct EnumAVariantsData {
 //     pub unit_enum: (),
 //     pub tuple_enum: TupleEnumVariantType,
 //     pub struct_enum: StructEnumVariantType,
@@ -35,7 +35,7 @@ pub enum MyEnum {
         #[derive(Debug, Clone)]
     )
 )]
-pub enum AnotherEnum {
+pub enum EnumB {
     A,
     B(f64),
     C { flag: bool },
@@ -57,9 +57,54 @@ pub enum AnotherEnum {
 //     pub flag: bool,
 // }
 
+#[derive(VariantsDataStruct)]
+#[variants_data_struct(
+    vis = pub(crate),
+    variants_tys_attrs(
+        #[derive(Debug)]
+    )
+)]
+pub enum EnumC {
+    A,
+    #[variants_data_struct_field(
+        field_name = custom_b,
+        variant_ty_name = BType,
+        variant_ty_vis = pub(self),
+        variant_ty_attrs(
+            #[derive(Clone)]
+        )
+    )]
+    B(f64),
+    #[variants_data_struct_field(
+        field_name = custom_c,
+        variant_ty_name = CType,
+        variant_ty_vis = pub(self),
+        variant_ty_attrs(
+            #[derive(Clone)]
+        )
+    )]
+    C {
+        flag: bool,
+    },
+}
+
+// Equivalent to:
+// pub(crate) struct EnumCVariantsData {
+//     pub(crate) a: (),
+//     pub(crate) custom_b: BType,
+//     pub(crate) custom_c: CType,
+// }
+// #[derive(Clone, Debug)]
+// pub(self) struct BType(pub(self) f64);
+//
+// #[derive(Clone, Debug)]
+// pub(self) struct CType {
+//     pub(self) flag: bool,
+// }
+
 #[test]
 fn test_variants_data_struct() {
-    let _data_struct = MyEnumVariantsData {
+    let _data_struct = EnumAVariantsData {
         unit_enum: (),
         tuple_enum: TupleEnumVariantType(42, "Hello".to_string()),
         struct_enum: StructEnumVariantType {

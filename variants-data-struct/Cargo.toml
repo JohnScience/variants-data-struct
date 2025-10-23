@@ -1,6 +1,6 @@
 [package]
 name = "variants-data-struct"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 authors = ["Dmitrii Demenev <demenev.dmitriy1@gmail.com>"]
 description = "A derive macro to convert enums into a struct where the variants are members and types are that that of variants data."
